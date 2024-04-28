@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import {Ionicons} from '@expo/vector-icons'
+import {FontAwesome5} from '@expo/vector-icons'
 const Icon = (props) => {
   return (
     <TouchableOpacity
@@ -9,7 +9,7 @@ const Icon = (props) => {
             ...props.iconStyle,
         }}    
     >
-        <Ionicons 
+        <FontAwesome5 
             name={props.name}
             size={props.size} 
             color={props.color}/>

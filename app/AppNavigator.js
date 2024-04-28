@@ -6,15 +6,15 @@ import BookScreen from './screens/BookScreen';
 import CategoryScreen from './screens/CategoryScreen';
 import Login from './screens/Login';
 
-const Drawar = createDrawerNavigator();
+const Drawer = createDrawerNavigator();
 const AppNavigator = () => {
   return (
-    <Drawar.Navigator initialRouteName='Home'>
-        <Drawar.Screen name='Home' component={HomeScreen}/>
-        <Drawar.Screen name='Books' component={BookScreen}/>         
-        <Drawar.Screen name='Category' component={CategoryScreen}/>         
-        <Drawar.Screen name='Login' component={Login}/>         
-    </Drawar.Navigator>
+    <Drawer.Navigator initialRouteName='Home'>
+        <Drawer.Screen name='Home' component={HomeScreen}/>
+        <Drawer.Screen name='Books' component={BookScreen}/>         
+        <Drawer.Screen name='Category' component={CategoryScreen}/>         
+        <Drawer.Screen name='Login' component={Login}/>         
+    </Drawer.Navigator>
   )
 }
 

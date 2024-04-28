@@ -1,10 +1,10 @@
 import { View, Text, TouchableHighlight, Image, StyleSheet } from 'react-native'
 import React from 'react'
 
-const BookItem = (props) => {
+const CategoryItem = (props) => {
   return (
-      <TouchableHighlight 
-        onPress={props.onItemPressed}
+    <TouchableHighlight 
+      // onPress={props.selectDish}
       >
         <View style={styles.container}>
             {props.item.image && 
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
       color: '#6e6969'
   }
 })
-export default BookItem
+export default CategoryItem
