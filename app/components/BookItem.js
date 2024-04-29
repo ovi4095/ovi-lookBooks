@@ -30,13 +30,16 @@ const BookItem = (props) => {
 }
 const styles = StyleSheet.create({
   container: {
+      backgroundColor:'#60696b',
       alignItems: 'flex-start',
       flexDirection: 'row',
       padding: 15,
-      border: '1px solid gray',
       borderRadius: 12,
+      borderWidth: 0.2,
       padding: 20,
-      margin: 5,
+      margin: 0,
+      marginTop: 15,
+      marginBottom: -5,
       elevation: 5,
   },
   details: {
@@ -49,10 +52,13 @@ const styles = StyleSheet.create({
       height: 80,
   },
   name: {
+      color: '#fff',
+      fontSize: 20,
       fontWeight: '500',
+      marginBottom: 5
   },
   description: {
-      color: '#6e6969'
+      color: '#fff'
   }
 })
 export default BookItem

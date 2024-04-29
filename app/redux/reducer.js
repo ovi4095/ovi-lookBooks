@@ -3,6 +3,7 @@ import * as actionTypes from './actionTypes'
 const INITIAL_STATE = {
     books: [],
     categories: [],
+    reviews: [],
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -17,6 +18,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 categories: action.payload,
+            }
+        case actionTypes.LOAD_REVIEWS:
+            return {
+                ...state,
+                reviews: action.payload,
             }
         default:
             return state;
