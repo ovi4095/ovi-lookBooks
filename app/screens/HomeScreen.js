@@ -6,6 +6,7 @@ import { useIsFocused } from '@react-navigation/native';
 import CategoryCarousel from '../components/CategoryCarousel';
 import { navigate } from '../NavigationRoot';
 import HomeBookList from '../components/HomeBookList';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const mapStateToProps = state => {
   return{
@@ -37,13 +38,18 @@ const HomeScreen = (props) => {
             <Text style={styles.mainTitle}>Find Your</Text>
             <Text style={styles.secondTitle}>Book From Category</Text>
         </View>
-        <ScrollView>
-            <CategoryCarousel categories={props.categories} />
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <CategoryCarousel categories={props.categories}/>
             <View style={styles.bookSection}>
                 <Text style={styles.bookSectionTitle}>See Books</Text>
-                <Button title='See All' onPress={() => navigate('Books')}/>
+                <TouchableOpacity
+                  onPress={() => navigate('Books')}
+                >
+                    <Text style={styles.seeAll}>See All</Text>
+                </TouchableOpacity>
+                {/* <Button title='See All' onPress={() => navigate('Books')}/> */}
             </View>
-            <HomeBookList books={props.books} />
+            <HomeBookList books={props.books} key={props.books.id}/>
         </ScrollView>
     </View>
   )
@@ -81,6 +87,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  seeAll: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight:'700'
+  }
 });
 
 export default connect(mapStateToProps,mapDispatchTOProps)(HomeScreen)

@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000'
   },
   listPosition: {
-    padding: 2,
+    padding: 5,
     paddingTop: 0
   },
 })

@@ -63,7 +63,7 @@ const BookScreen = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#000'
+    backgroundColor: '#000',
   },
   listPosition: {
     padding: 2,

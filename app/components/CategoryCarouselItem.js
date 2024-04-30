@@ -2,10 +2,13 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { navigate } from '../NavigationRoot';
 
-const CategoryCarouselItem = ({item, index}) => {
+const CategoryCarouselItem = ({item, index, onItemPressed}) => {
   return (
     <TouchableOpacity
-        onPress={() => navigate('Category Books',{book: item})}
+        onPress={() => {
+          navigate('Category Books',{book: item})
+          onItemPressed;
+          }}
         style={{
         marginLeft: 24,
         marginRight: index === item.length - 1 ? 24 : 0,

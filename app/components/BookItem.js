@@ -30,7 +30,8 @@ const BookItem = (props) => {
 }
 const styles = StyleSheet.create({
   container: {
-      backgroundColor:'#60696b',
+    //   backgroundColor:'#60696b',
+      backgroundColor:'#333',
       alignItems: 'flex-start',
       flexDirection: 'row',
       padding: 15,

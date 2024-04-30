@@ -1,21 +1,26 @@
 import { Image, View, StyleSheet, TouchableOpacity, Text} from 'react-native'
 import React from 'react'
 
-const HomeBookList = ({books}) => {
+const HomeBookList = ({books, key}) => {
+
+  let selectedBooks = books.filter(book => {
+      return  book.category === 'Biography'
+  })
+
   return (
-    <View style={styles.container}>
-      {books.map((book)=> {
+    <View  style={styles.container}>
+      {selectedBooks.map((book, index)=> {
         return (
-            <TouchableOpacity>
-                <View key={book.id}>
-                <View style={styles.imageBox}>
-                    <Image style={styles.image} source={{uri: book.image}} />
-                </View>
-                <View style={styles.footer}>
-                    <View style={styles.titleBox}>
-                        <Text style={styles.title}>{book.name}</Text>
-                    </View>
-                </View>
+            <TouchableOpacity key={index}>
+                <View >
+                  <View style={styles.imageBox}>
+                      <Image style={styles.image} source={{uri: book.image}} />
+                  </View>
+                  <View style={styles.footer}>
+                      <View style={styles.titleBox}>
+                          <Text style={styles.title}>{book.name}</Text>
+                      </View>
+                  </View>
                 </View>
             </TouchableOpacity>
         )
