@@ -5,13 +5,92 @@ import BookScreen from './screens/BookScreen';
 import CategoryScreen from './screens/CategoryScreen';
 import Login from './screens/Login';
 import CategoryBookListScreen from './screens/CategoryBookListScreen';
-import { TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from './components/Icon';
+import { connect } from 'react-redux';
+import { logOut } from './redux/authActionCreator';
+import { navigate } from './NavigationRoot';
+
+
+const mapStateToProps = state => {
+  return{
+    isAuth: state.isAuth
+  }
+}
+
+const mapDispatchTOProps = dispatch => {
+  return {
+    logOut: () => dispatch(logOut())
+  }
+}
 
 const Drawer = createDrawerNavigator();
 
 
-const AppNavigator = () => {
+
+const AppNavigator = (props) => {
+
+  const authentication = props.isAuth === false?(
+    <Drawer.Screen  name='Login' component={Login}
+              options={{
+                  drawerIcon: () =>(
+                        <Icon 
+                            name='user-plus'
+                            color='#fff'
+                            size={20}
+                            />
+                  ),
+                  drawerLabelStyle:{
+                    color: '#fff',
+                    alignSelf:'auto'
+                  }
+                }}
+  
+            />
+  ):(
+    <Drawer.Screen  name='Log out' component={HomeScreen}
+              options={{
+                  drawerLabel:'',
+                  drawerIcon: () =>(
+                    <TouchableOpacity 
+                      style={{
+                        alignItems:'flex-start',
+                        marginRight:2
+                      }}
+                      onPress={() =>{
+                        navigate('Home');
+                        props.logOut();
+                      }}
+                    >
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent:'flex-start', alignItems:"flex-start"}}>
+                            <View>
+                              <Icon 
+                                  name='sign-out-alt'
+                                  color='#fff'
+                                  size={20}
+                                  />
+                            </View>
+                            <View>
+                              <Text style={{
+                                color: '#fff',
+                                marginLeft: 33,
+                                fontWeight: '600'
+                              }}>
+                                Log out
+                              </Text>
+                          </View>
+                        </View>
+                    </TouchableOpacity>
+                  ),
+                  drawerLabelStyle:{
+                    color: '#fff',
+                    alignSelf:'auto'
+                  }
+                }}
+  
+            />
+  );
+
   return (
     <Drawer.Navigator
         screenOptions={{
@@ -46,15 +125,12 @@ const AppNavigator = () => {
                   fontSize: 20,
                 },
                 drawerIcon: () =>(
-         
-                  <TouchableOpacity>
+        
                       <Icon
-                          action = {() => props.handleHideModal()} 
                           name='home'
                           color='#fff'
                           size={20}
                           />
-                  </TouchableOpacity>
                 ),
                 drawerLabelStyle:{
                   color: '#fff',
@@ -65,14 +141,11 @@ const AppNavigator = () => {
           <Drawer.Screen name='Books' component={BookScreen}
             options={{
                 drawerIcon: () =>(
-                  <TouchableOpacity>
                       <Icon
-                          action = {() => props.handleHideModal()} 
                           name='book-open'
                           color='#fff'
                           size={20}
                           />
-                  </TouchableOpacity>
                 ),
                 drawerLabelStyle:{
                   color: '#fff',
@@ -85,14 +158,11 @@ const AppNavigator = () => {
           <Drawer.Screen name='Category' component={CategoryScreen}
             options={{
                 drawerIcon: () =>(
-                  <TouchableOpacity>
                       <Icon
-                          action = {() => props.handleHideModal()} 
                           name='list-alt'
                           color='#fff'
                           size={20}
                           />
-                  </TouchableOpacity>
                 ),
                 drawerLabelStyle:{
                   color: '#fff',
@@ -101,27 +171,7 @@ const AppNavigator = () => {
               }}
 
           />         
-                
-          <Drawer.Screen  name='Login' component={Login}
-            options={{
-                drawerIcon: () =>(
-                  <TouchableOpacity>
-                      <Icon
-                          action = {() => props.handleHideModal()} 
-                          name='user-plus'
-                          color='#fff'
-                          size={20}
-                          />
-                  </TouchableOpacity>
-                ),
-                drawerLabelStyle:{
-                  color: '#fff',
-                  alignSelf:'auto'
-                }
-              }}
-
-          />         
-                
+          {authentication}  
           <Drawer.Screen
             name='Category Books' component={CategoryBookListScreen}
               options={{
@@ -132,4 +182,4 @@ const AppNavigator = () => {
   )
 }
 
-export default AppNavigator
+export default connect(mapStateToProps,mapDispatchTOProps)(AppNavigator)

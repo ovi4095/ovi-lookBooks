@@ -6,10 +6,13 @@ import ReviewsList from '../components/ReviewsList'
 import { connect } from 'react-redux'
 import { fetchReviews } from '../redux/actionCreators'
 import { useIsFocused } from '@react-navigation/native'
+import { navigate } from '../NavigationRoot'
+import { StarRatingDisplay } from 'react-native-star-rating-widget'
 
 const mapStateToProps = state =>  {
   return {
     reviews: state.reviews,
+    isAuth: state.isAuth
   }
 }
 
@@ -38,7 +41,25 @@ const BookDetailScreen = (props) => {
                                                     <View style={styles.emptyReviewListPosition}>
                                                         <Text style={styles.emptyReviewList}>no review yet!</Text>
                                                     </View>;
-                                                  
+  let postReview = props.isAuth === true? <PostReview book={props.book}/>:(
+                                          <TouchableOpacity
+                                             onPress={() => {
+                                              navigate('Login');
+                                              props.handleHideModal();
+                                              }}
+                                            >
+                                              <View style={styles.authBtn}>
+                                                  <Text style={styles.authText}>Sign in to post Review</Text>
+                                              </View>
+                                          </TouchableOpacity>)
+                                          
+  let starRaingCount = 0;
+  for(review of selectedReviews) {
+    starRaingCount += parseFloat(review.rating)
+  }
+  let averageRating = parseInt(parseFloat(starRaingCount)/parseInt(selectedReviews.length));
+  
+
   return (
    <Modal>
       <View style={styles.container}>
@@ -95,6 +116,19 @@ const BookDetailScreen = (props) => {
                         Author: {props.book.author}
                         </Text>
                     </View>
+                    <View style={styles.ratingPosition}>
+                        <View style={styles.ratingTitlePosition}>
+                            <Text  
+                                style={styles.ratingTitle}>Rating:</Text>
+                        </View>
+                        <View style={styles.starPosition}>
+                            <StarRatingDisplay
+                                starStyle={{width:5}}
+                                starSize={14}
+                                rating={averageRating}
+                            />
+                        </View>
+                    </View>
                     <View
                         style={styles.descriptionPosition}
                     >
@@ -114,7 +148,7 @@ const BookDetailScreen = (props) => {
                         {reviewSection}
                     </View>
                     <View>
-                        <PostReview book={props.book}/>
+                        {postReview}
                     </View>
                 </View>
           </ScrollView>
@@ -175,9 +209,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
     padding: 5,
+    width: 323,
   
   },
   title: {
+    
     alignSelf:'auto',
     color: '#fff',
     fontSize:20,
@@ -187,11 +223,9 @@ const styles = StyleSheet.create({
   authorPosition: {
     alignItems:'flex-start',
     flexDirection:'row',
-    marginBottom: 15,
     padding: 5,
-    paddingBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#fff'
+    paddingBottom: 5,
+    
   },
   author: {
     color: '#fff',
@@ -238,6 +272,45 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     fontSize: 24
   },
+  authBtn: {
+    backgroundColor: '#333',
+    width: 250,
+    alignItems:'center',
+    borderRadius: 16,
+    alignSelf: 'center',
+    marginBottom:30
+
+  },
+  authText: {
+    color:'#fff',
+    fontSize: 20,
+    padding:10,
+  },
+  ratingPosition: {
+    padding:5,
+    display: 'flex',
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#fff',
+    marginBottom:15,
+    paddingBottom:10
+  },
+  review: {
+    color: '#fff',
+    fontSize:16,
+    paddingLeft: 5,
+    marginTop: 5
+  },
+  ratingTitlePosition: {
+    alignSelf:'center',
+  },
+  ratingTitle: {
+    color:'#fff',
+    fontSize:16,
+  },
+  starPosition: {
+    marginTop: 4
+  }
 })
 
 
