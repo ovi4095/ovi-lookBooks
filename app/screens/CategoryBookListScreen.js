@@ -5,6 +5,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { fetchBooks } from '../redux/actionCreators';
 import BookItem from '../components/BookItem';
 import BookDetailScreen from './BookDetailScreen';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const mapStateToProps = state => {
   return {
@@ -49,7 +50,12 @@ const CategoryBookListScreen = (props) => {
     return(
       <View style={styles.container}>
       {bookDetail}
-        <View style={styles.listPosition}>
+        <ScrollView 
+          showsVerticalScrollIndicator={false}
+          style={styles.listPosition}>
+          <Text style={styles.categoryTitle}>
+            {categoryName}
+          </Text>
           <FlatList
               data={categoryBooks}
               renderItem={({item}) => (
@@ -59,8 +65,9 @@ const CategoryBookListScreen = (props) => {
                     />
               )}
               keyExtractor={item => item.id.toString()}
+              scrollEnabled={false}
           />
-        </View>
+        </ScrollView>
     </View>
     )
 }
@@ -74,6 +81,14 @@ const styles = StyleSheet.create({
     padding: 2,
     height:'100%'
   },
+  categoryTitle: {
+    color:'#fff',
+    fontSize: 24,
+    fontWeight:'700',
+    alignSelf: 'center',
+    marginTop:15,
+    marginBottom:10,
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryBookListScreen)

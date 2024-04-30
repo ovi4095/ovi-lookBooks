@@ -94,9 +94,11 @@ const AppNavigator = (props) => {
   return (
     <Drawer.Navigator
         screenOptions={{
+          headerTitleAlign:'center',
           headerTitleStyle: {
             color: '#fff',
-            fontSize: 20
+            fontSize: 20,
+            alignSelf:'center'
           },
           headerStyle: {
               backgroundColor:'#60696b',

@@ -44,16 +44,19 @@ const styles =StyleSheet.create({
     flexDirection: 'row',
     padding: 15,
   },
-  imagePosition: {},
+  imagePosition: {
+    marginTop: 15
+  },
   image: {
     backgroundColor: '#fff',
     borderRadius: 50,
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
   },
   reviewContainer: {
     marginLeft: 10,
     marginTop: 10,
+    width: 200
   },
   reviewNamePosition: {},
   reviewName: {
