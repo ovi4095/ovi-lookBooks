@@ -1,6 +1,5 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import BookScreen from './screens/BookScreen';
 import CategoryScreen from './screens/CategoryScreen';
@@ -10,7 +9,6 @@ import { TouchableOpacity } from 'react-native';
 import Icon from './components/Icon';
 
 const Drawer = createDrawerNavigator();
-const Stack = createNativeStackNavigator();
 
 
 const AppNavigator = () => {
@@ -42,6 +40,11 @@ const AppNavigator = () => {
         initialRouteName='Home'>
           <Drawer.Screen name='Home' component={HomeScreen}
               options={{
+                headerTitle:'LookBooks',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  fontSize: 20,
+                },
                 drawerIcon: () =>(
          
                   <TouchableOpacity>

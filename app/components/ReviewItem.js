@@ -21,7 +21,7 @@ const ReviewItem = (props) => {
               <Text style={styles.review}>{props.review}</Text></View>
         <View style={styles.ratingPosition}>
                 <View style={styles.ratingTitlePosition}>
-                    <Text 
+                    <Text  
                         style={styles.ratingTitle}>Rating:</Text>
                 </View>
                 <View style={styles.starPosition}>

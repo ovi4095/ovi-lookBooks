@@ -30,7 +30,7 @@ const CategoryScreen = (props) => {
             <FlatList
                 data={props.categories}
                 renderItem={({item}) => (
-                  <CategoryItem item={item} selectDish={() => props.navigation.navigate('Category Books')}/>
+                  <CategoryItem item={item} selectCategory={() => props.navigation.navigate('Category Books')}/>
                 )}
                 keyExtractor={item => item.id.toString()}
             />

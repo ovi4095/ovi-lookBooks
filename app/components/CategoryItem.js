@@ -1,6 +1,5 @@
 import { View, Text, TouchableHighlight, Image, StyleSheet } from 'react-native'
 import React from 'react'
-import CategoryBookList from '../screens/CategoryBookListScreen'
 import { navigate } from '../NavigationRoot'
 
 const CategoryItem = (props) => {
